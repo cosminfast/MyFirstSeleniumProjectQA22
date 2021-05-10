@@ -35,11 +35,11 @@ public class LoginTest {
     @Test
     public void loginWithInvalidPassword() {
         driver.get("http://testfasttrackit.info/selenium-test/");
-        driver.findElement(By.cssSelector("#header > div > div.skip-links > div > a > span.label")).click();
-        driver.findElement(By.cssSelector("#header-account > div > ul > li.last > a")).click();
-        driver.findElement(By.id("email")).sendKeys("cosmin@fasttrackit.org");
+        driver.findElement(By.cssSelector(".skip-account .label")).click();
+        driver.findElement(By.cssSelector("[title='Log In']")).click();
+        driver.findElement(By.cssSelector("#email")).sendKeys("cosmin@fasttrackit.org");
         driver.findElement(By.id("pass")).sendKeys("123123123");
-        driver.findElement(By.cssSelector("#send2 > span > span")).click();
+        driver.findElement(By.cssSelector("#send2")).click();
         WebElement errorTextElement = driver.findElement(By.cssSelector(".error-msg span"));
         Assert.assertEquals("Invalid login or password.", errorTextElement.getText());
     }
@@ -53,6 +53,13 @@ public class LoginTest {
         Assert.assertEquals("This is a required field.", emailErrorMessage.getText());
         WebElement passwordErroMessage = driver.findElement(By.id("advice-required-entry-pass"));
         Assert.assertEquals("This is a required field.", passwordErroMessage.getText());
+    }
+
+    @Test
+    public void clickSale() throws InterruptedException {
+        driver.get("http://testfasttrackit.info/selenium-test/");
+        driver.findElement(By.cssSelector("a[href*='sale.html'].level0")).click();
+        Thread.sleep(3000);
     }
 
     @After
